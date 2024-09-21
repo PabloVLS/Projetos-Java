@@ -21,10 +21,13 @@ public class Carro {
     }
     
     public void verificarTabelaFipe(){
-        System.out.println("\nDigite o valor do carro(FIPE):");
+        System.out.println("\nDigite o valor do carro(FIPE):"+modelo);
         valor=scan.nextDouble();
         
         valorFipe=valor*1.20;
-        System.out.println("O valor do carro com acrescimo de 20% será de:"+valorFipe);
+        System.out.println("O valor do "+modelo+" com acrescimo de 20% será de:"+valorFipe);
+        valorFipe=0;
     }
+
+    
 }
