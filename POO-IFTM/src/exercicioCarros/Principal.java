@@ -24,8 +24,16 @@ public class Principal {
         carro2.modelo="Corvette";
         carro2.ano=2018;
         carro2.mostrarInformacoes();
+        
         carro2.verificarTabelaFipe();
         
+        
+        Carro carro3 = new Carro();
+        carro3.marca="Koenigsegg";
+        carro3.modelo="Agera R";
+        carro3.ano=2011;
+        carro3.mostrarInformacoes();
+        carro3.verificarTabelaFipe();
         
         
     }
