@@ -17,16 +17,15 @@ public class Carro {
         System.out.println("\n\nMarca:"+marca);
         System.out.println("Modelo:"+modelo);
         System.out.println("Ano:"+ano);
-        System.out.println("Valor:"+valorFipe);
+        
     }
     
     public void verificarTabelaFipe(){
-        System.out.println("\nDigite o valor do carro(FIPE):"+modelo);
-        valor=scan.nextDouble();
+        System.out.println("\nDigite o valor do carro (FIPE): " + modelo);
+        valor = scan.nextDouble();
         
-        valorFipe=valor*1.20;
-        System.out.println("O valor do "+modelo+" com acrescimo de 20% será de:"+valorFipe);
-        valorFipe=0;
+        double valorFipe = valor * 1.20; // Calcular e armazenar o valorFipe localmente
+        System.out.println("O valor do " + modelo + " com acréscimo de 20% será de: " + valorFipe);
     }
 
     
