@@ -1,30 +1,23 @@
 
 package exercicioCarros;
+
 import java.util.Scanner;
+
 /**
  *
  * @author Pablo
  */
-public class Carro {
-    Scanner scan = new Scanner(System.in);
-    public String marca;
-    public String modelo;
-    public int ano;
-    public double valor;
-    public double valorFipe=valor;
-    
-    public void mostrarInformacoes(){
-        System.out.println("\n\nMarca:"+marca);
-        System.out.println("Modelo:"+modelo);
-        System.out.println("Ano:"+ano);
-        System.out.println("Valor:"+valorFipe);
-    }
-    
-    public void verificarTabelaFipe(){
-        System.out.println("\nDigite o valor do carro(FIPE):");
-        valor=scan.nextDouble();
-        
-        valorFipe=valor*1.20;
-        System.out.println("O valor do carro com acrescimo de 20% será de:"+valorFipe);
+public class Principal {
+    public static void main(String[] args) {
+        Scanner scan = new Scanner(System.in);
+        Carro carro = new Carro();
+        System.out.println("Digite o marca do carro:");
+        carro.marca =scan.next();
+        System.out.println("Digite o modelo do carro:");
+        carro.modelo =scan.next();
+        System.out.println("Digite o ano do carro:");
+        carro.ano =scan.nextInt();
+        carro.verificarTabelaFipe();
+        carro.mostrarInformacoes();
     }
 }
