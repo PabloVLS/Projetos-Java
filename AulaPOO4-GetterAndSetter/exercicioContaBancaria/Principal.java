@@ -18,6 +18,9 @@ public class Principal {
         conta.sacar(800);
         
         System.out.println("O seu saldo é:"+conta.getSaldo());
+
+
+        ContaBancaria conta1 = new ContaBancaria();
         
         
         
