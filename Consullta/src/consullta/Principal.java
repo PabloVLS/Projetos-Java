@@ -8,9 +8,7 @@ public class Principal {
 
     public static void main(String[] args) {
         // Usado construtor
-        Consulta consulta1 = new Consulta("Roberto Macedo Pires", "18/09/1987");
-        consulta1.setProfissao(null);
-        consulta1.setConvenio(false);
+        Consulta consulta1 = new Consulta("", "", "Caminhoneiro", true);
         consulta1.imprimir();
         
         Consulta consulta2 = new Consulta("\nReinaldo Antônio do Bairro das Industrias", "04/03/1972");
@@ -48,16 +46,6 @@ public class Principal {
          consulta6.setProfissao("Presidente");
          consulta6.setConvenio(false);
          consulta6.imprimir();
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         
         
     }
