@@ -5,20 +5,37 @@ package consullta;
  * @author Pablo
  */
 public class Consulta {
-    private  String nomeDoPaciente = "";
-    private  String dataDeNascimento = "";
-    private  String profissao= "";
+    private  String nomeDoPaciente;
+    private  String dataDeNascimento ;
+    private  String profissao;
     private  boolean convenio = false;
 
     public Consulta() {
-     
+        
     }
 
     public Consulta(String nomeDoPaciente, String dataDeNascimento, String profissao, boolean convenio) {
-        this.nomeDoPaciente = nomeDoPaciente;
-        this.dataDeNascimento = dataDeNascimento;
-        this.profissao = profissao;
-        this.convenio = convenio;
+        
+        if (dataDeNascimento == null || dataDeNascimento.equals("")) {
+            this.dataDeNascimento = "Sem preenchimento";
+        } else {
+            this.dataDeNascimento = dataDeNascimento;
+        }
+        
+        
+        if (profissao == null || profissao.equals("")) {
+            this.profissao = "Sem preenchimento";
+        } else {
+            this.profissao = profissao;
+        }
+        
+        
+        if (nomeDoPaciente == null || nomeDoPaciente.equals("")) {
+            this.nomeDoPaciente = "Sem preenchimento";
+        } else {
+            this.nomeDoPaciente = nomeDoPaciente;
+        }
+        
     }
     
     public Consulta(String nomeDoPaciente, String dataDeNascimento) {
