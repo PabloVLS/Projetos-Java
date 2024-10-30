@@ -29,6 +29,10 @@ public class ContaBancaria {
         return saldo;
     }
 
+    public void setSaldo(double saldo) {
+        this.saldo = saldo;
+    }
+
 
     
     public double getRendaMensal() {
@@ -53,4 +57,13 @@ public class ContaBancaria {
    public void verificarSaldo(){
        System.out.println("O saldo na conta de:"+this.titular+" é : R$"+this.saldo+".00");
    }
+   @Override
+    public String toString() {
+        return "ContaBancaria{" +
+               "titular='" + titular + '\'' +
+               ", saldo=" + saldo +
+               ", rendaMensal=" + rendaMensal +
+               '}';
+    }
+
 }
