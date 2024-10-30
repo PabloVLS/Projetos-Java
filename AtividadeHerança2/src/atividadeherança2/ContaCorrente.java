@@ -15,7 +15,28 @@ public class ContaCorrente extends ContaBancaria {
     }
 
     public void setLimiteEspecial(double limiteEspecial) {
-        this.limiteEspecial = limiteEspecial;
+        if((getSaldo()*40/100)>limiteEspecial){
+            this.limiteEspecial = limiteEspecial;
+        }else{
+            System.out.println("Limite Indisponivel!!\n");
+        }
+        
     }
     
+    public void sacar(double sacar){
+        if(sacar > this.limiteEspecial){
+             double saldinho = getSaldo();
+             saldinho= saldinho-sacar;
+             setSaldo(saldinho);
+        }
+    }
+    @Override
+    public String toString() {
+        return "ContaCorrente{" +
+               "titular='" + getTitular() + '\'' +
+               ", saldo=" + getSaldo() +
+               ", rendaMensal=" + getRendaMensal() +
+               ", limiteEspecial=" + limiteEspecial +
+               '}';
+    }
 }
