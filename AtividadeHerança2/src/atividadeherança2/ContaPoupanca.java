@@ -21,5 +21,14 @@ public class ContaPoupanca extends ContaBancaria{
         double juros = saldoAtual * (taxaJuros / 100);
         return juros;
     }
+    @Override
+    public String toString() {
+        return "ContaPoupanca{" +
+               "titular='" + getTitular() + '\'' +
+               ", saldo=" + getSaldo() +
+               ", rendaMensal=" + getRendaMensal() +
+               ", taxaJuros=" + taxaJuros +
+               '}';
+    }
     
 }
