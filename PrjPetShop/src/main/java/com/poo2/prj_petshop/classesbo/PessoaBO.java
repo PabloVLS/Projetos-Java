@@ -30,8 +30,8 @@ public class PessoaBO {
         
     }
 
-    public Pessoa buscarDono(Pessoa nome) {
-        return pDAO.buscarDono(nome);
+    public Pessoa buscarDono(int id) {
+        return pDAO.buscarDono(id);
     }
 
     public void exc(Pessoa pessoa) {

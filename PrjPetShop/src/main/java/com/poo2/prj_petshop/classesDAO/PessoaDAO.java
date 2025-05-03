@@ -20,12 +20,10 @@ import java.util.logging.Logger;
  */
 public class PessoaDAO {
     
-    Connection conn;
-    ManipulaData md;
     
-    public PessoaDAO(){    
-        conn = new Conexao().conectar();
-        md = new ManipulaData();
+    Connection conn= Conexao.getInstancia().getConexao();
+    ManipulaData md = ManipulaData.getInstancia();
+    public PessoaDAO(){     
     }
     
     public Pessoa salvar(Pessoa p){
@@ -86,15 +84,14 @@ public class PessoaDAO {
         return pessoa;
     }
 
-    public Pessoa buscarDono(Pessoa nome) {
+    public Pessoa buscarDono(int id) {
         Pessoa tutor = null;
         try{
-            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM pessoa WHERE LOWER(TRIM(nome)) = LOWER(TRIM(?))");
-            stmt.setString(1, nome.getNome().trim().toLowerCase());
+            PreparedStatement stmt = conn.prepareStatement("SELECT * FROM pessoa WHERE idpessoa = ?");
+            stmt.setInt(1, id);
 
             ResultSet rs = stmt.executeQuery(); 
             if(rs.next()){      
-                System.out.println("Dono encontrado! ID: " + rs.getInt("idpessoa") + ", Nome: " + rs.getString("nome"));
                 tutor = new Pessoa();
                 tutor.setId(rs.getInt("idpessoa"));
                 tutor.setNome(rs.getString("nome"));

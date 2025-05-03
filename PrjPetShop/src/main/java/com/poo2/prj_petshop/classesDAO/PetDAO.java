@@ -18,14 +18,12 @@ import java.util.List;
  * @author Pablo
  */
 public class PetDAO {
-    
-    Connection conn;
-    ManipulaData md;
+    Connection conn = Conexao.getInstancia().getConexao();
+    ManipulaData md = ManipulaData.getInstancia();
     PessoaDAO pDAO;
     
     public PetDAO(){
-        conn = new Conexao().conectar();
-        md = new ManipulaData();
+        
         pDAO = new PessoaDAO();
     
     }

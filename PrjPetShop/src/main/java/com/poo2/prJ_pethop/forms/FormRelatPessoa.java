@@ -176,6 +176,7 @@ public class FormRelatPessoa extends javax.swing.JFrame {
 
         btnConsultar.setBackground(new java.awt.Color(0, 0, 153));
         btnConsultar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnConsultar.setForeground(new java.awt.Color(255, 255, 255));
         btnConsultar.setText("CONSULTAR");
         btnConsultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -166,14 +166,17 @@ public class FormPet extends javax.swing.JFrame {
         Pessoa p = new Pessoa();
         Pessoa pe = new Pessoa();
         
-        String nomee = (String) cmbDonoPet.getSelectedItem();
-        String nome;
-            
-        nome = nomee.split("\\|")[0].trim();
+        String selecionado = (String) cmbDonoPet.getSelectedItem();
+        int idPessoa = -1;
 
-        p.setNome(nome);
+        if (selecionado != null && selecionado.contains("|")) {
+            String idStr = selecionado.split(" \\| ")[1].trim();
+            idPessoa = Integer.parseInt(idStr);  // agora você tem o ID real do dono
+        }
+
+        p.setNome(selecionado);
             
-        pe = pessoaBO.buscarDono(p);
+        pe = pessoaBO.buscarDono(idPessoa);
         
         Pet pet = new Pet();
         pet.setId_pet(Integer.parseInt(txtIdPet.getText()));
@@ -608,14 +611,17 @@ public class FormPet extends javax.swing.JFrame {
         Pessoa p = new Pessoa();
         Pessoa pe = new Pessoa();
         
-        String nome = (String) cmbDonoPet.getSelectedItem();
-        if (nome.contains("|")) {
-            nome = nome.split(" \\| ")[0].trim(); 
+        String selecionado = (String) cmbDonoPet.getSelectedItem();
+        int idPessoa = -1;
+
+        if (selecionado != null && selecionado.contains("|")) {
+            String idStr = selecionado.split(" \\| ")[1].trim();
+            idPessoa = Integer.parseInt(idStr);  // agora você tem o ID real do dono
         }
 
-        if (!nome.equals("Selecione") && cmbDonoPet.getSelectedItem()!=null) {
-            p.setNome(nome);
-            pe = pessoaBO.buscarDono(p);
+        if (!selecionado.equals("Selecione") && selecionado!=null) {
+            p.setNome(selecionado);
+            pe = pessoaBO.buscarDono(idPessoa);
             if(pe != null){
                 pet.setNome(txtNome.getText());
                 pet.setEspecie(txtEspecie.getText());

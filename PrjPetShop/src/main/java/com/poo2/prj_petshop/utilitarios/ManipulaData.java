@@ -12,6 +12,17 @@ import java.time.format.DateTimeFormatter;
  */
 public class ManipulaData {
     
+    private static ManipulaData instancia;
+    
+    private ManipulaData(){}
+    
+    public static ManipulaData getInstancia(){
+        if(instancia == null){
+            instancia = new ManipulaData();
+        }
+        return instancia;
+    }
+    
     public Date string2Date(String data){
         DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         Date dataSaida = Date.valueOf(LocalDate.parse(data,formato));
@@ -23,7 +34,6 @@ public class ManipulaData {
         try{
             java.util.Date date = new SimpleDateFormat("yyyy-MM-dd").parse(data);
             data = new SimpleDateFormat("dd/MM/yyyy").format(date);
-            
         }
         
         catch(ParseException ex){
