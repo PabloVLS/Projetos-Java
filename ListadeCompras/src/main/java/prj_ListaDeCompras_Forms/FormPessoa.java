@@ -1,5 +1,7 @@
 package prj_ListaDeCompras_Forms;
 
+
+import java.util.List;
 import javax.swing.JOptionPane;
 import prj_ListaDeCompras_Bo.PessoaBO;
 import prj_ListaDeCompras_Objeto.Pessoa;
@@ -10,9 +12,48 @@ import prj_ListaDeCompras_Objeto.Pessoa;
  */
 public class FormPessoa extends javax.swing.JFrame {
     private final PessoaBO pessoaBO;
+    private List<Pessoa> lstPessoa;
+  
+    
     public FormPessoa() {
         pessoaBO = new PessoaBO();
         initComponents();
+    }
+    
+    private void preencherCampos(Pessoa pessoa){
+        txtId.setText(String.valueOf(pessoa.getId()));
+        txtNomeCadastro.setText(pessoa.getNome());
+        txtCpfCadastro.setText(pessoa.getCpf());
+        txtDataNascCadastro.setText(pessoa.getDataNascimento());
+        btnSalvar.setEnabled(false);
+    }
+    
+    private void preencherCampos(){
+        if(!lstPessoa.isEmpty()){
+            int index = cmbNome.getSelectedIndex();
+            Pessoa pessoa = lstPessoa.get(index);
+            preencherCampos(pessoa);
+        }
+    }
+    
+    private void preencherCombo(){
+        String nome = txtNome.getText();
+        if(!nome.isEmpty()){
+            lstPessoa = pessoaBO.getPessoa(nome);
+            lstPessoa.forEach(nomePessoas ->{
+                cmbNome.addItem(nomePessoas.getNome() + " | " + nomePessoas.getId());
+            });
+        }else{
+            cmbNome.removeAllItems();
+        }
+    }
+    
+    private void novo(){
+        txtId.setText("");
+        txtNomeCadastro.setText("");
+        txtCpfCadastro.setText("");
+        txtDataNascCadastro.setText("");
+        btnSalvar.setEnabled(true);
     }
 
     @SuppressWarnings("unchecked")
@@ -29,7 +70,8 @@ public class FormPessoa extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
-        jcbNome = new javax.swing.JComboBox<>();
+        cmbNome = new javax.swing.JComboBox<>();
+        btnConsultar = new javax.swing.JButton();
         txtNomeCadastro = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtCpfCadastro = new javax.swing.JTextField();
@@ -46,7 +88,7 @@ public class FormPessoa extends javax.swing.JFrame {
 
         jTextField1.setText("jTextField1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel2.setText("Cadastro de Pessoas");
@@ -79,6 +121,18 @@ public class FormPessoa extends javax.swing.JFrame {
                 txtNomeCaretUpdate(evt);
             }
         });
+        txtNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomeActionPerformed(evt);
+            }
+        });
+
+        btnConsultar.setText("Consultar");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -90,10 +144,15 @@ public class FormPessoa extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtNome)
-                    .addComponent(jcbNome, 0, 241, Short.MAX_VALUE))
-                .addGap(199, 199, 199))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtNome)
+                            .addComponent(cmbNome, 0, 241, Short.MAX_VALUE))
+                        .addGap(199, 199, 199))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addComponent(btnConsultar)
+                        .addGap(280, 280, 280))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -102,9 +161,10 @@ public class FormPessoa extends javax.swing.JFrame {
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                .addComponent(jcbNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(cmbNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                .addComponent(btnConsultar))
         );
 
         jLabel6.setText("Cadastrar Pessoa");
@@ -187,7 +247,7 @@ public class FormPessoa extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -229,11 +289,18 @@ public class FormPessoa extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txtNomeCaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_txtNomeCaretUpdate
-
+        preencherCombo();
     }//GEN-LAST:event_txtNomeCaretUpdate
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-
+        Pessoa p = new Pessoa();
+        p.setId(Integer.parseInt(txtId.getText()));
+        p.setNome(txtNomeCadastro.getText());
+        p.setCpf(txtCpfCadastro.getText());
+        p.setDataNascimento(txtDataNascCadastro.getText());
+        pessoaBO.excluir(p);
+        novo();
+        
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
@@ -252,10 +319,7 @@ public class FormPessoa extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalvarActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        txtId.setText("");
-        txtNomeCadastro.setText("");
-        txtCpfCadastro.setText("");
-        txtDataNascCadastro.setText("");
+        novo();
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
@@ -273,6 +337,14 @@ public class FormPessoa extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnEditarActionPerformed
 
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        preencherCampos();
+    }//GEN-LAST:event_btnConsultarActionPerformed
+
+    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
+
+    }//GEN-LAST:event_txtNomeActionPerformed
+
 
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -283,10 +355,12 @@ public class FormPessoa extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnConsultar;
     private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JComboBox<String> cmbNome;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -299,7 +373,6 @@ public class FormPessoa extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JComboBox<String> jcbNome;
     private javax.swing.JTextField txtCpfCadastro;
     private javax.swing.JTextField txtDataNascCadastro;
     private javax.swing.JTextField txtId;

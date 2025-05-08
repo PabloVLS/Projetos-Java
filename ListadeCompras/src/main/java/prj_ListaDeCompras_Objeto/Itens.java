@@ -8,6 +8,15 @@ public class Itens {
     private int id;
     private String nome;
     private int quantidade;
+    private int id_pessoa;
+
+    public int getId_pessoa() {
+        return id_pessoa;
+    }
+
+    public void setId_pessoa(int id_pessoa) {
+        this.id_pessoa = id_pessoa;
+    }
     private String dataCompra;
 
     public int getId() {

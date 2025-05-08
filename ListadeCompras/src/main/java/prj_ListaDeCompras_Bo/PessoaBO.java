@@ -1,5 +1,7 @@
 package prj_ListaDeCompras_Bo;
 
+import java.util.ArrayList;
+import java.util.List;
 import prj_ListaDeCompras_DAO.PessoaDAO;
 import prj_ListaDeCompras_Objeto.Pessoa;
 
@@ -20,6 +22,14 @@ public class PessoaBO {
     
     public Pessoa editar(Pessoa p){
         return pessoaDAO.editar(p);
+    }
+    
+    public Pessoa excluir(Pessoa p){
+        return pessoaDAO.excluir(p);
+    }
+    
+    public List<Pessoa> getPessoa(String nome){
+        return pessoaDAO.getPessoa(nome);
     }
     
 }
