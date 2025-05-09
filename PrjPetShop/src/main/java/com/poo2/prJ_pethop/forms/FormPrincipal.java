@@ -140,3 +140,55 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem mniSair;
     // End of variables declaration//GEN-END:variables
 }
+
+
+/*Encapsulamento
+Oculta os detalhes internos de uma classe e permite acesso controlado por métodos públicos (getters/setters).
+Exemplo: atributos private com métodos get e set.
+
+Herança
+Uma classe pode herdar atributos e métodos de outra classe.
+Exemplo: class Gato extends Animal {}
+
+ *  POLIMORFISMO:
+ * - Um método pode agir de formas diferentes.
+ * - Tipos:
+ *   a) Sobrescrita (@Override): Subclasse muda o método do pai.
+ *   b) Sobrecarga: Vários métodos com o mesmo nome e parâmetros diferentes.
+ * - Ex: animal.fazerSom(); → Pode imprimir "Miau" ou "Au au".
+
+ *  ABSTRAÇÃO:
+* - Usa a palavra-chave "abstract".
+ * - Pode ter métodos normais (com código) e métodos abstratos (sem código).
+ * - Não pode ser instanciada (não pode fazer: new Animal()).
+ * - Quem herda (extends) é obrigado a implementar os métodos abstratos.
+
+ * Ex:
+ * abstract class Animal {
+ *     abstract void emitirSom(); // sem corpo
+ * }
+
+ * class Cachorro extends Animal {
+ *     @Override
+ *     void emitirSom() {
+ *         System.out.println("Au au");
+ *     }
+ * }
+INTERFACE
+ * - Define um conjunto de métodos obrigatórios.
+ * - Não tem código (só os nomes dos métodos).
+ * - Quem implementa (implements) é obrigado a escrever o corpo de todos os métodos.
+ * - Uma classe pode implementar várias interfaces.
+
+ * Ex:
+ * interface Veiculo {
+ *     void acelerar(); // só a assinatura
+ * }
+
+ * class Moto implements Veiculo {
+ *     @Override
+ *     public void acelerar() {
+ *         System.out.println("Moto acelerando...");
+ *     }
+ * }
+*/
