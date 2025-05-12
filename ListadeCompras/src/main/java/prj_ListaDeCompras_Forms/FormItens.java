@@ -36,10 +36,15 @@ public class FormItens extends javax.swing.JFrame {
         modelo.setRowCount(0);
         
         for(Itens it : itens){
+            double valorTotal = it.getQuantidade() * it.getValorUnitario();
             modelo.addRow(new Object[]{
                 it.getId(),
                 it.getNome(),
-                it.getQuantidade()
+                it.getQuantidade(),
+                it.getValorUnitario(),
+                valorTotal,
+                it.getDataCompra()
+                
             });
         }
     }
@@ -48,6 +53,7 @@ public class FormItens extends javax.swing.JFrame {
         txtId.setText("");
         txtNome.setText("");
         txtQuantidade.setText("");
+        txtValorUnitario.setText("");
     }
     
     private void preencherCombo(){
@@ -87,6 +93,10 @@ public class FormItens extends javax.swing.JFrame {
         btnConsultar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         txtId = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txtValorUnitario = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtDataCompra = new javax.swing.JTextField();
 
         jPasswordField1.setText("jPasswordField1");
 
@@ -150,17 +160,17 @@ public class FormItens extends javax.swing.JFrame {
 
         jTableItens.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Nome", "Quantidade"
+                "ID", "Nome", "Quantidade", "Valor Unitario", "Total", "Data Compra"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -175,7 +185,11 @@ public class FormItens extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTableItens);
         if (jTableItens.getColumnModel().getColumnCount() > 0) {
             jTableItens.getColumnModel().getColumn(0).setResizable(false);
+            jTableItens.getColumnModel().getColumn(1).setResizable(false);
             jTableItens.getColumnModel().getColumn(2).setResizable(false);
+            jTableItens.getColumnModel().getColumn(3).setResizable(false);
+            jTableItens.getColumnModel().getColumn(4).setResizable(false);
+            jTableItens.getColumnModel().getColumn(5).setResizable(false);
         }
 
         jLabel5.setText("Pessoa");
@@ -194,6 +208,16 @@ public class FormItens extends javax.swing.JFrame {
         });
 
         jLabel6.setText("Id:");
+
+        jLabel7.setText("Valor Unitario:");
+
+        jLabel8.setText("Data Compra:");
+
+        txtDataCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDataCompraActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -216,16 +240,24 @@ public class FormItens extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel6))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel6)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel7))
+                            .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
-                            .addComponent(txtId)
-                            .addComponent(txtQuantidade))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtDataCompra)
+                            .addComponent(txtNome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                            .addComponent(txtId, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtQuantidade, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtValorUnitario, javax.swing.GroupLayout.Alignment.LEADING))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -268,7 +300,15 @@ public class FormItens extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtValorUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtDataCompra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEditar)
                     .addComponent(btnRemover)
@@ -297,6 +337,8 @@ public class FormItens extends javax.swing.JFrame {
         Itens item = new Itens();
         item.setNome(txtNome.getText());
         item.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
+        item.setValorUnitario(Double.parseDouble(txtValorUnitario.getText()));
+        item.setDataCompra(txtDataCompra.getText());
         int index = cmbNome.getSelectedIndex();
         Pessoa pessoa = lstPessoa.get(index);
         item.setId_pessoa(pessoa.getId());
@@ -324,10 +366,14 @@ public class FormItens extends javax.swing.JFrame {
             String id = jTableItens.getValueAt(linha, 0).toString();
             String nome = jTableItens.getValueAt(linha, 1).toString();
             String quantidade = jTableItens.getValueAt(linha, 2).toString();
+            String valorUnitario = jTableItens.getValueAt(linha, 3).toString();
+            String data = jTableItens.getValueAt(linha, 4).toString();
             
             txtId.setText(id);
             txtNome.setText(nome);
             txtQuantidade.setText(quantidade);
+            txtValorUnitario.setText(valorUnitario);
+            txtDataCompra.setText(data);
 
         }
     }//GEN-LAST:event_jTableItensMouseClicked
@@ -338,6 +384,8 @@ public class FormItens extends javax.swing.JFrame {
             itens.setId(Integer.parseInt(txtId.getText()));
             itens.setNome(txtNome.getText());
             itens.setQuantidade(Integer.parseInt(txtQuantidade.getText()));
+            itens.setValorUnitario(Double.parseDouble(txtValorUnitario.getText()));
+            itens.setDataCompra(txtDataCompra.getText());
             int index = cmbNome.getSelectedIndex();
             Pessoa pessoa = lstPessoa.get(index);
             itens.setId_pessoa(pessoa.getId());
@@ -364,6 +412,10 @@ public class FormItens extends javax.swing.JFrame {
         consultar();
     }//GEN-LAST:event_btnRemoverActionPerformed
 
+    private void txtDataCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataCompraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDataCompraActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -386,16 +438,20 @@ public class FormItens extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableItens;
+    private javax.swing.JTextField txtDataCompra;
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNomePessoa;
     private javax.swing.JTextField txtQuantidade;
+    private javax.swing.JTextField txtValorUnitario;
     // End of variables declaration//GEN-END:variables
 
 

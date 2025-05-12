@@ -8,6 +8,8 @@ public class Itens {
     private int id;
     private String nome;
     private int quantidade;
+    private double valorUnitario;
+    private String dataCompra;
     private int id_pessoa;
 
     public int getId_pessoa() {
@@ -17,10 +19,17 @@ public class Itens {
     public void setId_pessoa(int id_pessoa) {
         this.id_pessoa = id_pessoa;
     }
-    private String dataCompra;
-
+    
     public int getId() {
         return id;
+    }
+
+    public double getValorUnitario() {
+        return valorUnitario;
+    }
+
+    public void setValorUnitario(double valorUnitario) {
+        this.valorUnitario = valorUnitario;
     }
 
     public void setId(int id) {

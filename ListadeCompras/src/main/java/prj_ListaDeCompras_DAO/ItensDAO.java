@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import prj_ListaDeCompras_Objeto.Itens;
 import prj_ListaDeCompras_Utilitarios.Conexao;
+import prj_ListaDeCompras_Utilitarios.ManipulaData;
 
 /**
  *
@@ -17,6 +18,7 @@ import prj_ListaDeCompras_Utilitarios.Conexao;
 public class ItensDAO {
 
     Connection conn = Conexao.getInstancia().getConexao();
+    ManipulaData md = ManipulaData.getInstancia();
     public ItensDAO() {
     }
 
@@ -24,10 +26,12 @@ public class ItensDAO {
     
     public Itens salvar(Itens i) {
         try{
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO itens(nome, quantidade,id_pessoa) VALUES(?,?,?)",Statement.RETURN_GENERATED_KEYS);
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO itens(nome, quantidade, valorunitario , datacompra, id_pessoa) VALUES(?,?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
             stmt.setString(1, i.getNome());
             stmt.setInt(2, i.getQuantidade());
-            stmt.setInt(3, i.getId_pessoa());
+            stmt.setDouble(3, i.getValorUnitario());
+            stmt.setDate(4, md.string2Date(i.getDataCompra()));
+            stmt.setInt(5, i.getId_pessoa());
             stmt.execute();
             ResultSet rs = stmt.getGeneratedKeys();
             if(rs.next()){
@@ -53,6 +57,8 @@ public class ItensDAO {
                 item.setId(rs.getInt("id"));
                 item.setNome(rs.getString("nome"));
                 item.setQuantidade(rs.getInt("quantidade"));
+                item.setValorUnitario(rs.getDouble("valorunitario"));
+                item.setDataCompra(md.date2String(rs.getString("datacompra")));
                 item.setId_pessoa(rs.getInt("id_pessoa"));
                 lista.add(item);
             }
@@ -65,10 +71,12 @@ public class ItensDAO {
 
     public Itens editar(Itens i) {
         try{
-            PreparedStatement stmt = conn.prepareStatement("UPDATE itens SET nome = ? , quantidade = ? WHERE id_pessoa = ?");
+            PreparedStatement stmt = conn.prepareStatement("UPDATE itens SET nome = ? , quantidade = ? , valorunitario = ? , datacompra = ? WHERE id_pessoa = ?");
             stmt.setString(1, i.getNome());
             stmt.setInt(2, i.getQuantidade());
-            stmt.setInt(3, i.getId_pessoa());
+            stmt.setDouble(3, i.getValorUnitario());
+            stmt.setDate(4, md.string2Date(i.getDataCompra()));
+            stmt.setInt(5, i.getId_pessoa());
             stmt.executeUpdate();
         }catch(SQLException ex){
             ex.printStackTrace();
