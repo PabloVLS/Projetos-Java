@@ -1,0 +1,50 @@
+-- 📌 Criar tabela exemplo
+CREATE TABLE produtos (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100),
+    quantidade INTEGER,
+    valorunitario DOUBLE PRECISION,
+    data_compra DATE
+);
+
+-- ➕ Adicionar coluna
+ALTER TABLE produtos ADD COLUMN valortotal DOUBLE PRECISION;
+
+-- ✏️ Alterar tipo de coluna
+ALTER TABLE produtos ALTER COLUMN quantidade TYPE DOUBLE PRECISION;
+
+-- 📝 Renomear coluna
+ALTER TABLE produtos RENAME COLUMN valorunitario TO preco_unitario;
+
+-- 🗑️ Remover coluna
+ALTER TABLE produtos DROP COLUMN valortotal;
+
+-- 📝 Renomear tabela
+ALTER TABLE produtos RENAME TO itens;
+
+-- 🗑️ Excluir tabela (cuidado!)
+DROP TABLE itens;
+
+-- ✅ Ver dados da tabela
+SELECT * FROM produtos;
+
+-- ✅ Exibir estrutura da tabela (use no terminal psql)
+-- \d produtos
+-- 🛠️ Criar uma tabela com campos de data
+CREATE TABLE exemplo_datas (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(100),
+    data_somente DATE,
+    data_e_hora TIMESTAMP
+);
+
+-- 📥 Inserir dados usando data atual
+INSERT INTO exemplo_datas (nome, data_somente, data_e_hora)
+VALUES ('Teste 1', CURRENT_DATE, CURRENT_TIMESTAMP);
+
+-- 🔁 Inserir outro exemplo
+INSERT INTO exemplo_datas (nome, data_somente, data_e_hora)
+VALUES ('Teste 2', CURRENT_DATE, CURRENT_TIMESTAMP);
+
+-- 🔎 Ver os dados inseridos
+SELECT * FROM exemplo_datas;
