@@ -1,0 +1,7 @@
+com\mycompany\prj_padrao_strategy2\strategies\Order.class
+com\mycompany\prj_padrao_strategy2\strategies\CreditCard.class
+com\mycompany\prj_padrao_strategy2\Prj_Padrao_Strategy2.class
+com\mycompany\prj_padrao_strategy2\strategies\PayStrategy.class
+com\mycompany\prj_padrao_strategy2\strategies\PayByCreditCard.class
+com\mycompany\prj_padrao_strategy2\strategies\PayByPayPal.class
+com\mycompany\prj_padrao_strategy2\strategies\Demo.class
