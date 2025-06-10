@@ -1,0 +1,8 @@
+com\mycompany\prj_padrao_observer\ForecastDisplay.class
+com\mycompany\prj_padrao_observer\Observer.class
+com\mycompany\prj_padrao_observer\DisplayElement.class
+com\mycompany\prj_padrao_observer\Subject.class
+com\mycompany\prj_padrao_observer\WeatherData.class
+com\mycompany\prj_padrao_observer\Prj_Padrao_Observer.class
+com\mycompany\prj_padrao_observer\CurrentConditionsDisplay.class
+com\mycompany\prj_padrao_observer\StatisticsDisplay.class
