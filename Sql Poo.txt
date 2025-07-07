@@ -1,0 +1,77 @@
+Mysql:
+CREATE DATABASE aviacoes;
+USE aviacoes;
+
+-- TABELA PILOTO
+CREATE TABLE piloto (
+    id_piloto INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    licenca VARCHAR(50) NOT NULL
+);
+
+-- TABELA ENDERECO (1:1 com piloto)
+CREATE TABLE endereco (
+    id_endereco INT AUTO_INCREMENT PRIMARY KEY,
+    rua VARCHAR(100) NOT NULL,
+    numero VARCHAR(10) NOT NULL,
+    cep VARCHAR(10) NOT NULL,
+    id_piloto INT UNIQUE NOT NULL,
+    FOREIGN KEY (id_piloto) REFERENCES piloto(id_piloto) ON DELETE CASCADE
+);
+
+-- TABELA VOO
+CREATE TABLE voo (
+    id_voo INT AUTO_INCREMENT PRIMARY KEY,
+    destino VARCHAR(100) NOT NULL,
+    data DATE NOT NULL
+);
+
+-- TABELA PILOTO_VOO (N:N)
+CREATE TABLE piloto_voo (
+    id_piloto INT NOT NULL,
+    id_voo INT NOT NULL,
+    PRIMARY KEY (id_piloto, id_voo),
+    FOREIGN KEY (id_piloto) REFERENCES piloto(id_piloto),
+    FOREIGN KEY (id_voo) REFERENCES voo(id_voo)
+);
+
+
+Postgres:
+-- Cria o banco de dados
+CREATE DATABASE aviacoes;
+
+-- Conectar no banco criado (no psql ou pgAdmin, depende da ferramenta)
+\c aviacoes;
+
+-- TABELA PILOTO
+CREATE TABLE piloto (
+    id_piloto SERIAL PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    licenca VARCHAR(50) NOT NULL
+);
+
+-- TABELA ENDERECO (1:1 com piloto)
+CREATE TABLE endereco (
+    id_endereco SERIAL PRIMARY KEY,
+    rua VARCHAR(100) NOT NULL,
+    numero VARCHAR(10) NOT NULL,
+    cep VARCHAR(10) NOT NULL,
+    id_piloto INTEGER UNIQUE NOT NULL,
+    FOREIGN KEY (id_piloto) REFERENCES piloto(id_piloto) ON DELETE CASCADE
+);
+
+-- TABELA VOO
+CREATE TABLE voo (
+    id_voo SERIAL PRIMARY KEY,
+    destino VARCHAR(100) NOT NULL,
+    data DATE NOT NULL
+);
+
+-- TABELA PILOTO_VOO (N:N)
+CREATE TABLE piloto_voo (
+    id_piloto INTEGER NOT NULL,
+    id_voo INTEGER NOT NULL,
+    PRIMARY KEY (id_piloto, id_voo),
+    FOREIGN KEY (id_piloto) REFERENCES piloto(id_piloto),
+    FOREIGN KEY (id_voo) REFERENCES voo(id_voo)
+);
